@@ -1,0 +1,51 @@
+/*
+ * 홈 화면.
+ * 누를 수 있는 것은 큰 카드 하나와 아래 버튼 하나, 모두 두 개다.
+ * 여기에 요소를 더하지 않는다. 선택지가 늘면 어디를 눌러야 할지 헤매신다.
+ */
+
+.home-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  width: 100%;
+  /* 화면 가운데를 크게 차지해 여기를 누르면 된다는 것이 한눈에 보이게 */
+  min-height: 320px;
+  padding: var(--space-4) var(--space-5);
+
+  background: var(--color-bg);
+  border: 6px solid var(--color-fill);
+  border-radius: 28px;
+
+  font-family: inherit;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--motion-press) var(--ease),
+    transform var(--motion-press) var(--ease);
+}
+
+.home-card:active {
+  background: var(--color-pressed);
+  transform: scale(0.99);
+}
+
+.home-card__photo {
+  flex: none;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.home-card__text {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* 문제가 없는 날에는 사진 없이 문구만 가운데에 놓는다 */
+.home-card__text--alone {
+  text-align: center;
+}
