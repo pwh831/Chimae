@@ -1,0 +1,45 @@
+/* 사진을 쓰는 활동들이 함께 쓰는 부분 */
+
+.photo-activity__photo {
+  /* 사진이 화면에서 가장 큰 자리를 차지하되 마이크가 가려지지 않게 */
+  max-height: 300px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* 인물 짚기 — 사진 위에 누를 자리를 얹는다 */
+.photo-people__frame {
+  position: relative;
+  display: inline-block;
+}
+
+.photo-people__image {
+  display: block;
+  max-height: 460px;
+  border-radius: 20px;
+}
+
+/*
+ * 누를 자리. 어느 사람이 정답인지 드러나지 않도록 셋 다 똑같이 보인다.
+ */
+.photo-people__spot {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%);
+  border: 5px solid var(--color-fill);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--motion-press) var(--ease);
+}
+
+.photo-people__spot:active {
+  background: rgba(31, 41, 51, 0.12);
+}
+
+.photo-people__name {
+  font-size: 44px;
+  font-weight: 700;
+  text-align: center;
+}

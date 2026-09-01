@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="재봉틀 자리표시 그림">
+  <rect width="800" height="600" fill="#dfe3e7"/>
+  <g fill="none" stroke="#6b7680" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M180 380h440v40H180z"/><path d="M240 380V240h240v60"/><path d="M480 300h80v80"/><circle cx="270" cy="200" r="34"/><path d="M300 340h120"/></g>
+  <text x="400" y="556" text-anchor="middle" font-family="sans-serif" font-size="30" fill="#45525e">재봉틀</text>
+</svg>

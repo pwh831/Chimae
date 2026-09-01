@@ -16,3 +16,22 @@
   height: 100%;
   animation: app-fade-in var(--motion-slow) var(--ease) both;
 }
+
+/*
+ * 시연용 화면 전환 버튼.
+ * 어르신이 쓰는 것이 아니라 보여주는 사람이 쓴다.
+ * 눈에 띄지 않게 구석에 작게 둔다.
+ */
+.app__mode-switch {
+  position: fixed;
+  right: 20px;
+  bottom: 16px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text-soft);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}

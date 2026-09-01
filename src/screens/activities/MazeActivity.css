@@ -1,0 +1,58 @@
+/*
+ * 미로 찾기 (PRD 4.2 시공간).
+ *
+ * 붙어 있는 칸을 탭해서 옮긴다. 드래그하지 않는다.
+ * 막힌 칸은 아예 누를 수 없게 두어 "틀렸다"는 순간이 생기지 않게 한다.
+ */
+
+.maze__grid {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.maze__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 104px;
+  height: 104px;
+  border-radius: 12px;
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--color-text-soft);
+}
+
+/* 지날 수 있는 칸 */
+.maze__cell--open {
+  background: var(--color-surround);
+}
+
+/* 벽 */
+.maze__cell--wall {
+  background: var(--color-fill);
+}
+
+/* 지금 계신 자리 */
+.maze__cell--here {
+  background: var(--color-fill);
+  color: var(--color-on-fill);
+}
+
+/* 도착 자리 */
+.maze__cell--goal {
+  border: 5px solid var(--color-fill);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* 지금 옮겨갈 수 있는 칸만 누를 수 있다 */
+.maze__step {
+  border: 5px dashed var(--color-fill);
+  background: var(--color-bg);
+  cursor: pointer;
+  transition: background-color var(--motion-press) var(--ease);
+}
+
+.maze__step:active {
+  background: var(--color-pressed);
+}

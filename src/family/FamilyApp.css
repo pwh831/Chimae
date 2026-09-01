@@ -1,0 +1,241 @@
+/*
+ * 가족·요양보호사 화면.
+ *
+ * 어르신용 UI 기준(24px 글자, 100px 터치 영역, 화면당 네 개)을 따르지 않는다.
+ * 여기 쓰는 사람은 자기 휴대폰을 쓰는 자녀·손자녀·요양보호사다.
+ * 태블릿 화면 안에서도 휴대폰처럼 보이도록 좁은 기둥으로 놓는다.
+ */
+
+.family {
+  --f-text: #1f2933;
+  --f-soft: #66727e;
+  --f-line: #dde2e7;
+  --f-bg: #f5f7f9;
+  --f-card: #ffffff;
+  --f-accent: #2f6b5f;
+
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  height: 100%;
+  margin: 0 auto;
+  background: var(--f-bg);
+  color: var(--f-text);
+  font-size: 16px;
+  line-height: 1.6;
+  border-left: 1px solid var(--f-line);
+  border-right: 1px solid var(--f-line);
+}
+
+.family__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 20px 12px;
+  background: var(--f-card);
+  border-bottom: 1px solid var(--f-line);
+}
+
+.family__title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.family__leave {
+  padding: 8px 12px;
+  border: 1px solid var(--f-line);
+  border-radius: 8px;
+  background: var(--f-card);
+  color: var(--f-soft);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.family__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.family__tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--f-line);
+  background: var(--f-card);
+}
+
+.family__tab {
+  padding: 14px 4px;
+  border: none;
+  background: none;
+  color: var(--f-soft);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.family__tab--active {
+  color: var(--f-accent);
+  font-weight: 700;
+  box-shadow: inset 0 2px 0 var(--f-accent);
+}
+
+.family__section-title {
+  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.family__hint {
+  margin-bottom: 16px;
+  color: var(--f-soft);
+  font-size: 13px;
+}
+
+.family__card {
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  background: var(--f-card);
+  border: 1px solid var(--f-line);
+  border-radius: 12px;
+}
+
+.family__card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.family__chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--f-bg);
+  border: 1px solid var(--f-line);
+  font-size: 12px;
+  color: var(--f-soft);
+}
+
+/* 민감 표시. 색만으로 알리지 않도록 글자를 함께 둔다 */
+.family__chip--sensitive {
+  border-color: var(--f-accent);
+  color: var(--f-accent);
+}
+
+.family__card-title {
+  font-weight: 700;
+}
+
+.family__card-desc {
+  color: var(--f-soft);
+  font-size: 14px;
+}
+
+.family__field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.family__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.family__input,
+.family__textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--f-line);
+  border-radius: 8px;
+  background: var(--f-card);
+  color: inherit;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.family__textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+.family__choice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.family__choice {
+  padding: 10px 14px;
+  border: 1px solid var(--f-line);
+  border-radius: 999px;
+  background: var(--f-card);
+  color: inherit;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.family__choice--on {
+  border-color: var(--f-accent);
+  background: var(--f-accent);
+  color: #ffffff;
+}
+
+.family__check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.family__submit {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--f-accent);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.family__submit:disabled {
+  background: var(--f-line);
+  color: var(--f-soft);
+  cursor: default;
+}
+
+.family__steps {
+  margin-bottom: 14px;
+  color: var(--f-soft);
+  font-size: 13px;
+}
+
+/* 공동 목표 — 함께 채운 정도만 보여준다 */
+.family__goal-bar {
+  height: 14px;
+  margin: 10px 0 6px;
+  border-radius: 999px;
+  background: var(--f-bg);
+  border: 1px solid var(--f-line);
+  overflow: hidden;
+}
+
+.family__goal-fill {
+  height: 100%;
+  background: var(--f-accent);
+}
+
+.family__note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--f-line);
+  color: var(--f-soft);
+  font-size: 13px;
+}

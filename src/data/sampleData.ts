@@ -8,6 +8,7 @@
 import type {
   Activity,
   Elder,
+  FacilityGoal,
   FamilyMember,
   FamilyQuestion,
   LifeStory,
@@ -71,6 +72,16 @@ export const lifeStories: LifeStory[] = [
     description:
       '아이들 옷을 직접 지어 입히던 발재봉틀. 손잡이를 돌리는 소리를 아이들이 좋아했다.',
     isSensitive: false,
+    photoUrl: '/images/story-sewing-machine.svg',
+  },
+  {
+    id: 'story-family-photo',
+    category: 'person',
+    title: '옛날 가족 사진',
+    description:
+      '아이들이 어릴 적 명절에 찍은 사진. 마루에 나란히 앉아 찍었다.',
+    isSensitive: false,
+    photoUrl: '/images/story-family.svg',
   },
   {
     id: 'story-husband',
@@ -148,7 +159,87 @@ export const activities: Activity[] = [
       invitation: '다음 소절을 불러주시겠어요?',
     },
   },
+  {
+    id: 'activity-yeongdo-photo',
+    kind: 'photo-recall',
+    lifeStoryId: 'story-yeongdo',
+    data: {
+      photoUrl: '/images/story-yeongdo.svg',
+      question: '이 골목, 기억나시나요?',
+      invitation: '그때 이야기를 들려주시겠어요?',
+    },
+  },
+  {
+    id: 'activity-sewing-photo',
+    kind: 'photo-recall',
+    lifeStoryId: 'story-sewing-machine',
+    data: {
+      photoUrl: '/images/story-sewing-machine.svg',
+      question: '이 물건을 어디에 쓰셨나요?',
+      invitation: '무엇을 만드셨는지 들려주시겠어요?',
+    },
+  },
+  {
+    id: 'activity-family-people',
+    kind: 'photo-people',
+    lifeStoryId: 'story-family-photo',
+    data: {
+      photoUrl: '/images/story-family.svg',
+      // 위치는 사진 안에서의 백분율. 그림 속 세 사람 자리와 맞춰 두었다
+      people: [
+        { id: 'p1', name: '영수', relation: '큰아들', x: 25, y: 42 },
+        { id: 'p2', name: '순자', relation: '본인', x: 50, y: 40 },
+        { id: 'p3', name: '미경', relation: '막내딸', x: 75, y: 43 },
+      ],
+      invitation: '이 사진 찍던 날 이야기가 있으신가요?',
+    },
+  },
+  {
+    id: 'activity-husband-photo',
+    kind: 'photo-recall',
+    // 민감 주제로 표시된 소재. 활동 차례에서 뒤로 밀린다
+    lifeStoryId: 'story-husband',
+    data: {
+      photoUrl: '/images/story-family.svg',
+      question: '이 시절 이야기를 나눠볼까요?',
+      invitation: '그분 이야기를 들려주시겠어요?',
+    },
+  },
+  {
+    id: 'activity-cup-ball',
+    kind: 'cup-ball',
+    data: {
+      cupCount: 3,
+      ballIndex: 1,
+    },
+  },
+  {
+    id: 'activity-maze',
+    kind: 'maze',
+    data: {
+      // 시작(S)에서 도착(G)까지. 붙어 있는 빈 칸을 탭해서 옮긴다
+      rows: [
+        'S..#.',
+        '.#...',
+        '.#.#.',
+        '...#.',
+        '#..#G',
+      ],
+    },
+  },
 ]
+
+/**
+ * 이번 주 시설 공동 목표 (PRD 4.4).
+ * 누가 얼마나 했는지는 담지 않는다. 함께 채운 정도만 있다.
+ */
+export const facilityGoal: FacilityGoal = {
+  facilityName: '햇살 요양원',
+  title: '우리 요양원 기억 앨범',
+  weekStart: '2026-08-31',
+  target: 120,
+  progress: 74,
+}
 
 export const sessionLogs: SessionLog[] = [
   {

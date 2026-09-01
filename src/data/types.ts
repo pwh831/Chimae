@@ -114,20 +114,75 @@ export type SongData = {
   invitation: string
 }
 
-type ActivityBase = {
+/**
+ * 사진을 보고 자유롭게 이야기하는 활동.
+ * PRD 4.1의 "옛 동네 이야기"와 "물건 용도 말하기"가 같은 형태다.
+ */
+export type PhotoRecallData = {
+  photoUrl: string
+  /** 사진을 보며 건네는 물음. 예: "이 물건을 어디에 쓰셨나요?" */
+  question: string
+  invitation: string
+}
+
+/** 사진 속 사람 한 명과 그 위치(사진 안 백분율) */
+export type PhotoPerson = {
   id: string
-  /** 이 활동이 어떤 생애 소재에서 나왔는지 */
-  lifeStoryId: string
+  name: string
+  relation: string
+  x: number
+  y: number
 }
 
 /**
- * 회상 활동.
- * PRD 4.1의 나머지 활동(옛 동네 사진, 가족 사진 속 인물)은 만들 때 이 union에 더한다.
+ * 가족 사진 속 인물 짚기.
+ * 누구를 짚으셔도 그 사람이 누구인지 알려드리고 이야기를 청한다.
+ * 잘못 짚었다는 말을 하지 않는다.
  */
+export type PhotoPeopleData = {
+  photoUrl: string
+  people: PhotoPerson[]
+  invitation: string
+}
+
+/**
+ * 컵 속 공 찾기 (PRD 4.2 주의력).
+ * 찾을 때까지 몇 번이고 열어볼 수 있다. 횟수를 세지 않는다.
+ */
+export type CupBallData = {
+  cupCount: number
+  /** 공이 들어 있는 컵의 자리 */
+  ballIndex: number
+}
+
+/**
+ * 미로 찾기 (PRD 4.2 시공간).
+ * 붙어 있는 칸을 탭해서 옮긴다. 드래그하지 않는다.
+ * 막힌 칸을 눌러도 아무 일이 없을 뿐 틀렸다고 하지 않는다.
+ */
+export type MazeData = {
+  /** 한 줄이 한 행. '.' 지날 수 있음, '#' 벽, 'S' 시작, 'G' 도착 */
+  rows: string[]
+}
+
+type ActivityBase = {
+  id: string
+  /**
+   * 이 활동이 어떤 생애 소재에서 나왔는지.
+   * 보조 인지 활동(PRD 4.2)은 개인 소재와 무관하므로 비워 둔다.
+   */
+  lifeStoryId?: string
+}
+
+/** 회상 활동과 보조 인지 활동 */
 export type Activity =
   | (ActivityBase & { kind: 'recipe-order'; data: RecipeOrderData })
   | (ActivityBase & { kind: 'word-fill'; data: WordFillData })
   | (ActivityBase & { kind: 'song-continue'; data: SongData })
+  | (ActivityBase & { kind: 'photo-recall'; data: PhotoRecallData })
+  | (ActivityBase & { kind: 'photo-people'; data: PhotoPeopleData })
+  | (ActivityBase & { kind: 'cup-ball'; data: CupBallData })
+  | (ActivityBase & { kind: 'maze'; data: MazeData })
 
 export type ActivityKind = Activity['kind']
 
@@ -152,4 +207,25 @@ export type SessionLog = {
   spokenNotes: SpokenNote[]
   /** 이야기가 잘 이어졌던 소재. 다음 만남의 대화거리가 된다 */
   wellReceivedLifeStoryIds: string[]
+}
+
+/**
+ * 시설 공동 목표 (PRD 4.4).
+ *
+ * 상대는 다른 요양원이 아니라 목표치 자체다.
+ * 개인별 기여도를 담는 자리를 두지 않는다 — 자리가 있으면 언젠가 채워지고,
+ * 채워지면 순위가 된다.
+ *
+ * 어르신 화면에는 두지 않는다. "목표를 채우세요"가 되는 순간
+ * 사용을 유도하지 않는다는 원칙과 부딪힌다. 가족·시설 화면에만 보인다.
+ */
+export type FacilityGoal = {
+  facilityName: string
+  /** 목표를 채우면 남는 것. 예: "우리 요양원 기억 앨범" */
+  title: string
+  /** 이 주가 시작된 날 (YYYY-MM-DD) */
+  weekStart: string
+  /** 목표치와 함께 채운 정도 */
+  target: number
+  progress: number
 }

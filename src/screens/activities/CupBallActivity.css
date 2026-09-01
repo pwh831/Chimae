@@ -1,0 +1,38 @@
+/*
+ * 컵 속 공 찾기 (PRD 4.2 주의력).
+ *
+ * 찾을 때까지 몇 번이고 열어볼 수 있다. 횟수를 세지 않는다.
+ * 빈 컵을 열어도 틀렸다고 하지 않는다 — 아직 못 찾았을 뿐이다.
+ */
+
+.cup-ball__row {
+  display: flex;
+  justify-content: center;
+  gap: var(--touch-gap);
+}
+
+.cup-ball__cup {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 200px;
+  height: 220px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.cup-ball__cup--opened {
+  cursor: default;
+}
+
+/* 열린 컵은 위로 살짝 올라가 안이 보인다. 느리게 움직인다 */
+.cup-ball__lid {
+  transition: transform var(--motion-slow) var(--ease);
+}
+
+.cup-ball__cup--opened .cup-ball__lid {
+  transform: translateY(-56px);
+}

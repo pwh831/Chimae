@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="옛날 가족 사진 자리표시 그림">
+  <rect width="800" height="600" fill="#dfe3e7"/>
+  <g fill="none" stroke="#6b7680" stroke-width="9" stroke-linecap="round"><circle cx="200" cy="230" r="52"/><path d="M132 400c0-38 30-62 68-62s68 24 68 62"/><circle cx="400" cy="215" r="58"/><path d="M326 400c0-42 33-68 74-68s74 26 74 68"/><circle cx="600" cy="235" r="48"/><path d="M538 400c0-35 28-58 62-58s62 23 62 58"/></g>
+  <text x="400" y="556" text-anchor="middle" font-family="sans-serif" font-size="30" fill="#45525e">옛날 가족 사진</text>
+</svg>

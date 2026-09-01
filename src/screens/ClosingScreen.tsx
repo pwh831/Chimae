@@ -39,11 +39,53 @@ function SongIcon() {
   )
 }
 
+function PhotoIcon() {
+  return (
+    <svg viewBox="0 0 96 96" width="96" height="96" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="12" y="20" width="72" height="56" rx="8" />
+      <circle cx="34" cy="40" r="7" />
+      <path d="M16 64l20-18 14 12 12-10 18 16" />
+    </svg>
+  )
+}
+
+function PeopleIcon() {
+  return (
+    <svg viewBox="0 0 96 96" width="96" height="96" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="34" cy="34" r="14" />
+      <circle cx="66" cy="38" r="11" />
+      <path d="M12 76c0-13 10-22 22-22s22 9 22 22M60 76c0-11 7-18 16-18" />
+    </svg>
+  )
+}
+
+function CupIcon() {
+  return (
+    <svg viewBox="0 0 96 96" width="96" height="96" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M26 30h44l-8 46H34z" />
+      <rect x="20" y="20" width="56" height="12" rx="6" />
+    </svg>
+  )
+}
+
+function MazeIcon() {
+  return (
+    <svg viewBox="0 0 96 96" width="96" height="96" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="14" y="14" width="68" height="68" rx="6" />
+      <path d="M32 14v34h18V32h18M32 82V64h34" />
+    </svg>
+  )
+}
+
 const ICONS = {
   talk: TalkIcon,
   pot: PotIcon,
   word: WordIcon,
   song: SongIcon,
+  photo: PhotoIcon,
+  people: PeopleIcon,
+  cup: CupIcon,
+  maze: MazeIcon,
 }
 
 /** 오늘 한 일 하나. 그림과 글자를 함께 보여준다 */
@@ -52,6 +94,13 @@ export type ClosingSummaryItem = {
   icon: keyof typeof ICONS
   label: string
 }
+
+/*
+ * 마무리 화면에 보여줄 카드 수의 한계.
+ * 오늘 한 일을 전부 늘어놓으면 점검표가 된다. 몇 가지만 짚고 끝낸다.
+ * 전체 기록은 가족 화면에서 본다.
+ */
+const MAX_CARDS = 4
 
 type ClosingScreenProps = {
   summary: ClosingSummaryItem[]
@@ -69,7 +118,7 @@ export default function ClosingScreen({ summary }: ClosingScreenProps) {
     >
       <div className="closing__body">
         <div className="closing__summary">
-          {summary.map((item) => {
+          {summary.slice(0, MAX_CARDS).map((item) => {
             const Icon = ICONS[item.icon]
             return (
               <div className="closing__card" key={item.id}>
