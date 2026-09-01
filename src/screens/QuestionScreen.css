@@ -1,0 +1,51 @@
+/*
+ * 손자녀가 낸 문제를 푸는 화면.
+ *
+ * 여기서 지켜야 할 것: 고른 답을 두고 맞고 틀림을 가리지 않는다.
+ * X 표시, 빨간색, 점수, 정답 강조를 두지 않는다.
+ * 어떤 선택지를 골라도 화면이 움직이는 방식은 똑같다.
+ */
+
+.question__choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--touch-gap);
+}
+
+/* 화면이 바뀔 때 천천히 나타난다. 깜빡이지 않는다 */
+@keyframes question-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.question__reaction,
+.question__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  animation: question-appear var(--motion-slow) var(--ease) both;
+}
+
+/*
+ * 반응 문구.
+ * 어떤 답을 골랐든 글자 크기, 색, 자리, 머무는 시간이 모두 같다.
+ * 문구만 다르다. 아이콘은 두지 않는다 — 한쪽에만 붙으면 그것이 곧 채점 표시가 된다.
+ */
+.question__reaction-text {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--color-text);
+}
+
+/* 4단계에서 실제 메시지 화면으로 바뀔 자리 */
+.question__placeholder-text {
+  font-size: var(--text-lg);
+  color: var(--color-text-soft);
+}

@@ -1,5 +1,5 @@
-import HomeScreen from './screens/HomeScreen'
+import QuestionScreen from './screens/QuestionScreen'
 
 export default function App() {
-  return <HomeScreen />
+  return <QuestionScreen />
 }
