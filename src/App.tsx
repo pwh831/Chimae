@@ -1,5 +1,5 @@
-import ActivityScreen from './screens/ActivityScreen'
+import ClosingScreen from './screens/ClosingScreen'
 
 export default function App() {
-  return <ActivityScreen />
+  return <ClosingScreen />
 }
