@@ -1,0 +1,18 @@
+/*
+ * 화면 전환.
+ * 느리게 스며들듯 바뀐다. 밀거나 튀는 움직임은 두지 않는다.
+ */
+
+@keyframes app-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.app__screen {
+  height: 100%;
+  animation: app-fade-in var(--motion-slow) var(--ease) both;
+}

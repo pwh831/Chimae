@@ -1,0 +1,31 @@
+.hold-to-talk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.hold-to-talk__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 240px;
+  border: 6px solid var(--color-fill);
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--motion-press) var(--ease);
+}
+
+.hold-to-talk__button--held {
+  background: var(--color-pressed);
+}
+
+.hold-to-talk__hint {
+  font-size: var(--text-lg);
+  color: var(--color-text-soft);
+  /* 문구가 나타나도 버튼이 위로 밀리지 않게 자리를 잡아 둔다 */
+  min-height: 1.6em;
+}

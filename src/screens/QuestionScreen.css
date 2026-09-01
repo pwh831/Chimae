@@ -22,8 +22,7 @@
   }
 }
 
-.question__reaction,
-.question__placeholder {
+.question__reaction {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,10 +41,4 @@
   line-height: 1.4;
   text-align: center;
   color: var(--color-text);
-}
-
-/* 4단계에서 실제 메시지 화면으로 바뀔 자리 */
-.question__placeholder-text {
-  font-size: var(--text-lg);
-  color: var(--color-text-soft);
 }

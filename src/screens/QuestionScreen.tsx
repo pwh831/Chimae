@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import BigButton from '../components/BigButton'
 import ScreenLayout from '../components/ScreenLayout'
-import { familyQuestions } from '../data/sampleData'
+import type { FamilyQuestion } from '../data/types'
 import './QuestionScreen.css'
 
 /** 반응 문구가 머무는 시간. 읽고 넘어가기에 충분하되 지루하지 않게 */
 const REACTION_MS = 2800
 
-type Phase = 'asking' | 'reacting' | 'message'
+type QuestionScreenProps = {
+  question: FamilyQuestion
+  /** 반응을 보여준 뒤 다음 화면으로 넘어갈 때 부른다 */
+  onDone: () => void
+}
 
 /**
  * 손자녀가 낸 문제를 푸는 화면.
@@ -16,34 +20,16 @@ type Phase = 'asking' | 'reacting' | 'message'
  * 같은 시간 동안 따뜻한 말을 건네고 다음으로 넘어간다.
  * 고르고 난 뒤 어떤 선택지가 어떠했는지는 화면에 남기지 않는다.
  */
-export default function QuestionScreen() {
-  const question = familyQuestions.find((item) => !item.isRead) ?? familyQuestions[0]
-
-  const [phase, setPhase] = useState<Phase>('asking')
+export default function QuestionScreen({ question, onDone }: QuestionScreenProps) {
   const [chosenIndex, setChosenIndex] = useState<number | null>(null)
 
   useEffect(() => {
-    if (phase !== 'reacting') return
-    const timer = window.setTimeout(() => setPhase('message'), REACTION_MS)
+    if (chosenIndex === null) return
+    const timer = window.setTimeout(onDone, REACTION_MS)
     return () => window.clearTimeout(timer)
-  }, [phase])
+  }, [chosenIndex, onDone])
 
-  function handleChoose(index: number) {
-    setChosenIndex(index)
-    setPhase('reacting')
-  }
-
-  if (phase === 'message') {
-    return (
-      <ScreenLayout title="메시지">
-        <div className="question__placeholder">
-          <p className="question__placeholder-text">메시지 화면 예정</p>
-        </div>
-      </ScreenLayout>
-    )
-  }
-
-  if (phase === 'reacting') {
+  if (chosenIndex !== null) {
     /*
      * 보낸 사람이 마음에 두었던 선택지인지에 따라 건네는 말만 달라진다.
      * 맞고 틀림을 알리는 것이 아니라 이야기를 이어가기 위한 맞장구다.
@@ -70,7 +56,7 @@ export default function QuestionScreen() {
             label={choice}
             variant="secondary"
             full
-            onClick={() => handleChoose(index)}
+            onClick={() => setChosenIndex(index)}
           />
         ))}
       </div>

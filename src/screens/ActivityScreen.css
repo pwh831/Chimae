@@ -101,32 +101,3 @@
   line-height: 1.4;
 }
 
-.activity__mic {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 240px;
-  height: 240px;
-  border: 6px solid var(--color-fill);
-  border-radius: 50%;
-  background: var(--color-bg);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: background-color var(--motion-press) var(--ease);
-}
-
-.activity__mic--held {
-  background: var(--color-pressed);
-}
-
-.activity__hint {
-  font-size: var(--text-lg);
-  color: var(--color-text-soft);
-  /* 문구가 바뀌어도 마이크가 위아래로 움직이지 않게 */
-  min-height: 1.6em;
-}
-
-.activity__placeholder-text {
-  font-size: var(--text-lg);
-  color: var(--color-text-soft);
-}

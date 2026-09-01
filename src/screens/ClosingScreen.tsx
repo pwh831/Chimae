@@ -1,5 +1,4 @@
 import ScreenLayout from '../components/ScreenLayout'
-import { activities } from '../data/sampleData'
 import './ClosingScreen.css'
 
 function TalkIcon() {
@@ -21,14 +20,22 @@ function PotIcon() {
   )
 }
 
+/** 오늘 한 일 하나. 그림과 글자를 함께 보여준다 */
+export type ClosingSummaryItem = {
+  id: string
+  icon: 'talk' | 'pot'
+  label: string
+}
+
+type ClosingScreenProps = {
+  summary: ClosingSummaryItem[]
+}
+
 /**
  * 오늘 활동을 마치는 화면.
  * 다시 하도록 이끄는 버튼이나 문구를 두지 않는다.
  */
-export default function ClosingScreen() {
-  const recipe = activities.find((item) => item.kind === 'recipe-order')
-  const dish = recipe?.kind === 'recipe-order' ? recipe.data.dishName : null
-
+export default function ClosingScreen({ summary }: ClosingScreenProps) {
   return (
     <ScreenLayout
       title="오늘도 좋은 이야기 들려주셔서 고마워요"
@@ -36,20 +43,14 @@ export default function ClosingScreen() {
     >
       <div className="closing__body">
         <div className="closing__summary">
-          <div className="closing__card">
-            <span className="closing__card-icon">
-              <TalkIcon />
-            </span>
-            <span className="closing__card-label">문제 풀기</span>
-          </div>
-          {dish ? (
-            <div className="closing__card">
+          {summary.map((item) => (
+            <div className="closing__card" key={item.id}>
               <span className="closing__card-icon">
-                <PotIcon />
+                {item.icon === 'talk' ? <TalkIcon /> : <PotIcon />}
               </span>
-              <span className="closing__card-label">{dish} 이야기</span>
+              <span className="closing__card-label">{item.label}</span>
             </div>
-          ) : null}
+          ))}
         </div>
 
         <p className="closing__shared">가족에게 오늘 이야기를 전했어요</p>
