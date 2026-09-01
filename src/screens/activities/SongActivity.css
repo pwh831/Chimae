@@ -1,0 +1,13 @@
+/*
+ * 노래 이어부르기.
+ * 첫 소절을 보여드리고 그 다음을 불러주시도록 청한다.
+ */
+
+.song__line {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  /* 노래라는 것이 글자로도 보이게 따옴표를 둔다 */
+  color: var(--color-text);
+}

@@ -57,11 +57,11 @@ export const lifeStories: LifeStory[] = [
     photoUrl: '/images/story-yeongdo.svg',
   },
   {
-    id: 'story-dongbaek',
+    id: 'story-arirang',
     category: 'song',
-    title: '동백 아가씨',
+    title: '아리랑',
     description:
-      '라디오에서 나오면 늘 따라 부르시던 노래. 시장 일을 하며 흥얼거리곤 하셨다.',
+      '시장 일을 하며 늘 흥얼거리시던 노래. 아이들에게도 자주 불러 주셨다.',
     isSensitive: false,
   },
   {
@@ -122,14 +122,30 @@ export const activities: Activity[] = [
         { id: 'step-3', text: '쌀뜨물을 붓고 끓여요' },
         { id: 'step-4', text: '두부와 파를 올려 마무리해요' },
       ],
+      invitation: '김치찌개에 얽힌 이야기가 있으신가요?',
     },
   },
   {
-    id: 'activity-kimchi-talk',
-    kind: 'free-talk',
-    lifeStoryId: 'story-kimchi-jjigae',
+    id: 'activity-yeongdo-word',
+    kind: 'word-fill',
+    lifeStoryId: 'story-yeongdo',
     data: {
-      invitation: '김치찌개에 얽힌 이야기가 있으신가요?',
+      before: '영도 골목에는',
+      after: '참 많았지요',
+      // 셋 다 넣으면 말이 된다. 하나만 맞는 낱말을 두면 나머지가 오답이 된다
+      choices: ['계단이', '바람이', '고갯길이'],
+      invitation: '그 동네 이야기를 들려주시겠어요?',
+    },
+  },
+  {
+    id: 'activity-arirang-song',
+    kind: 'song-continue',
+    lifeStoryId: 'story-arirang',
+    data: {
+      songTitle: '아리랑',
+      // 민요라 가사를 그대로 써도 된다
+      openingLine: '아리랑 아리랑 아라리요',
+      invitation: '다음 소절을 불러주시겠어요?',
     },
   },
 ]
@@ -138,7 +154,7 @@ export const sessionLogs: SessionLog[] = [
   {
     id: 'session-2026-08-31',
     date: '2026-08-31',
-    activityIds: ['activity-kimchi-order', 'activity-kimchi-talk'],
+    activityIds: ['activity-kimchi-order'],
     // 음성 기능은 10단계에서 붙는다. 그 전까지는 비어 있다.
     spokenNotes: [],
     wellReceivedLifeStoryIds: ['story-kimchi-jjigae'],

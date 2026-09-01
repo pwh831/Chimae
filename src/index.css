@@ -69,6 +69,12 @@ body {
   font-size: var(--text-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /*
+   * 한국어는 낱말 중간에서 줄이 끊기면 읽기 어렵다.
+   * 낱말 단위로 넘기되, 한 낱말이 칸보다 길면 그때만 끊는다.
+   */
+  word-break: keep-all;
+  overflow-wrap: break-word;
   /* 두 번 탭 확대로 인한 조작 지연을 없앤다 */
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;

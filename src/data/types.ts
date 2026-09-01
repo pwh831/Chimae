@@ -81,11 +81,36 @@ export type RecipeOrderData = {
   /** 음식 이름. 예: "김치찌개" */
   dishName: string
   steps: RecipeStep[]
+  /** 활동을 마친 뒤 이야기를 청하는 말 */
+  invitation: string
 }
 
-/** 자유롭게 이야기하는 활동에 쓰는 값 */
-export type FreeTalkData = {
-  /** 말을 건네는 문장. 예: "김치찌개에 얽힌 이야기가 있으신가요?" */
+/**
+ * 빈칸에 들어갈 낱말 고르기.
+ *
+ * 격자형 크로스워드가 아니다. PRD 4.2가 크로스워드를 제외한 이유(난이도와
+ * 문자 입력 부담)를 피하려고 문장 하나에 빈칸 하나만 둔다.
+ *
+ * choices는 셋 다 넣었을 때 말이 되는 낱말로 채운다.
+ * 하나만 맞는 낱말을 두면 나머지 둘이 오답이 되어 판정이 생긴다.
+ */
+export type WordFillData = {
+  /** 빈칸 앞부분. 예: "영도 골목에는" */
+  before: string
+  /** 빈칸 뒷부분. 예: "참 많았지요" */
+  after: string
+  choices: [string, string, string]
+  invitation: string
+}
+
+/**
+ * 노래 이어부르기.
+ * 첫 소절을 보여드리고 그 다음을 불러주시도록 청한다.
+ */
+export type SongData = {
+  songTitle: string
+  /** 먼저 보여드리는 첫 소절 */
+  openingLine: string
   invitation: string
 }
 
@@ -97,12 +122,12 @@ type ActivityBase = {
 
 /**
  * 회상 활동.
- * 지금은 두 종류만 있다. PRD 4.1의 다른 활동(옛 동네, 노래, 물건, 가족 사진)은
- * 실제로 만들 때 이 union에 더한다.
+ * PRD 4.1의 나머지 활동(옛 동네 사진, 가족 사진 속 인물)은 만들 때 이 union에 더한다.
  */
 export type Activity =
   | (ActivityBase & { kind: 'recipe-order'; data: RecipeOrderData })
-  | (ActivityBase & { kind: 'free-talk'; data: FreeTalkData })
+  | (ActivityBase & { kind: 'word-fill'; data: WordFillData })
+  | (ActivityBase & { kind: 'song-continue'; data: SongData })
 
 export type ActivityKind = Activity['kind']
 

@@ -6,12 +6,10 @@ import HomeScreen from './screens/HomeScreen'
 import MessageScreen from './screens/MessageScreen'
 import QuestionScreen from './screens/QuestionScreen'
 import { activities, elder, familyQuestions, lifeStories } from './data/sampleData'
-import type { Activity, FamilyQuestion, SessionLog } from './data/types'
+import type { Activity, FamilyQuestion, LifeStory, SessionLog } from './data/types'
 import './App.css'
 
 type Step = 'home' | 'question' | 'message' | 'activity' | 'closing'
-
-type RecipeOrderActivity = Extract<Activity, { kind: 'recipe-order' }>
 
 function todayKey(): string {
   return new Date().toISOString().slice(0, 10)
@@ -27,12 +25,34 @@ function createLog(): SessionLog {
   }
 }
 
-/* 오늘 쓸 활동 재료. 9단계에서 AI가 만든 것으로 바뀔 자리다. */
-const recipeActivity = activities.find(
-  (item): item is RecipeOrderActivity => item.kind === 'recipe-order',
-)
-const talkActivity = activities.find((item) => item.kind === 'free-talk')
-const activityStory = lifeStories.find((item) => item.id === recipeActivity?.lifeStoryId)
+/*
+ * 오늘 할 활동. 소재를 찾지 못한 활동은 조용히 뺀다.
+ * 9단계에서 AI가 만든 활동이 이 자리에 들어온다.
+ *
+ * 지금은 있는 활동을 모두 이어서 한다. PRD 3장의 하루 분량은 1~2개이므로
+ * 11단계에서 시연 길이에 맞게 줄인다.
+ */
+const sessionActivities = activities
+  .map((activity) => ({
+    activity,
+    story: lifeStories.find((item) => item.id === activity.lifeStoryId),
+  }))
+  .filter(
+    (entry): entry is { activity: Activity; story: LifeStory } =>
+      entry.story !== undefined,
+  )
+
+/** 마무리 화면에 보여줄 그림과 이름 */
+function summarize(activity: Activity): ClosingSummaryItem {
+  switch (activity.kind) {
+    case 'recipe-order':
+      return { id: activity.id, icon: 'pot', label: `${activity.data.dishName} 이야기` }
+    case 'word-fill':
+      return { id: activity.id, icon: 'word', label: '낱말 채우기' }
+    case 'song-continue':
+      return { id: activity.id, icon: 'song', label: `${activity.data.songTitle} 부르기` }
+  }
+}
 
 /**
  * 하루 흐름을 잇는다.
@@ -46,14 +66,15 @@ export default function App() {
   const [readQuestionIds, setReadQuestionIds] = useState<string[]>(() =>
     familyQuestions.filter((item) => item.isRead).map((item) => item.id),
   )
+  const [activityIndex, setActivityIndex] = useState(0)
   const [log, setLog] = useState<SessionLog>(createLog)
 
   const newQuestion = familyQuestions.find(
     (item) => !readQuestionIds.includes(item.id),
   )
 
-  /** 활동 재료가 갖춰졌을 때만 회상 활동으로 간다. 없으면 조용히 마무리로 넘어간다 */
-  const canDoActivity = Boolean(recipeActivity && activityStory)
+  const current = sessionActivities[activityIndex]
+  const hasActivity = activityIndex < sessionActivities.length
 
   const handleStart = useCallback(() => {
     if (newQuestion) {
@@ -61,8 +82,8 @@ export default function App() {
       setStep('question')
       return
     }
-    setStep(canDoActivity ? 'activity' : 'closing')
-  }, [newQuestion, canDoActivity])
+    setStep(sessionActivities.length > 0 ? 'activity' : 'closing')
+  }, [newQuestion])
 
   const handleQuestionDone = useCallback(() => setStep('message'), [])
 
@@ -70,53 +91,50 @@ export default function App() {
     if (activeQuestion) {
       setReadQuestionIds((ids) => [...ids, activeQuestion.id])
     }
-    setStep(canDoActivity ? 'activity' : 'closing')
-  }, [activeQuestion, canDoActivity])
+    setStep(sessionActivities.length > 0 ? 'activity' : 'closing')
+  }, [activeQuestion])
 
-  const handleSpoken = useCallback((text: string) => {
-    if (!recipeActivity || !activityStory) return
-    setLog((current) => ({
-      ...current,
-      spokenNotes: [
-        ...current.spokenNotes,
-        { activityId: talkActivity?.id ?? recipeActivity.id, text },
-      ],
-      // 이야기가 이어진 소재로 남겨 가족에게 전한다
-      wellReceivedLifeStoryIds: [
-        ...current.wellReceivedLifeStoryIds,
-        activityStory.id,
-      ],
-    }))
-  }, [])
+  const handleSpoken = useCallback(
+    (text: string) => {
+      const entry = sessionActivities[activityIndex]
+      if (!entry) return
+      setLog((prev) => ({
+        ...prev,
+        spokenNotes: [...prev.spokenNotes, { activityId: entry.activity.id, text }],
+        // 이야기가 이어진 소재로 남겨 가족에게 전한다
+        wellReceivedLifeStoryIds: [...prev.wellReceivedLifeStoryIds, entry.story.id],
+      }))
+    },
+    [activityIndex],
+  )
 
   const handleActivityDone = useCallback(() => {
-    if (recipeActivity) {
-      const done = [recipeActivity.id, ...(talkActivity ? [talkActivity.id] : [])]
-      setLog((current) => ({
-        ...current,
-        activityIds: [...current.activityIds, ...done],
+    const entry = sessionActivities[activityIndex]
+    if (entry) {
+      setLog((prev) => ({
+        ...prev,
+        activityIds: [...prev.activityIds, entry.activity.id],
       }))
     }
-    setStep('closing')
-  }, [])
+    const next = activityIndex + 1
+    setActivityIndex(next)
+    if (next >= sessionActivities.length) setStep('closing')
+  }, [activityIndex])
 
   const summary = useMemo<ClosingSummaryItem[]>(() => {
     const items: ClosingSummaryItem[] = []
     if (activeQuestion) {
       items.push({ id: activeQuestion.id, icon: 'talk', label: '문제 풀기' })
     }
-    if (recipeActivity && log.activityIds.includes(recipeActivity.id)) {
-      items.push({
-        id: recipeActivity.id,
-        icon: 'pot',
-        label: `${recipeActivity.data.dishName} 이야기`,
-      })
+    for (const id of log.activityIds) {
+      const entry = sessionActivities.find((item) => item.activity.id === id)
+      if (entry) items.push(summarize(entry.activity))
     }
     return items
   }, [activeQuestion, log.activityIds])
 
   return (
-    <div className="app__screen" key={step}>
+    <div className="app__screen" key={`${step}-${activityIndex}`}>
       {step === 'home' ? (
         <HomeScreen
           elder={elder}
@@ -134,16 +152,11 @@ export default function App() {
         <MessageScreen question={activeQuestion} onDone={handleMessageDone} />
       ) : null}
 
-      {step === 'activity' && recipeActivity && activityStory ? (
+      {step === 'activity' && hasActivity ? (
         <ActivityScreen
           elder={elder}
-          activity={recipeActivity}
-          story={activityStory}
-          invitation={
-            talkActivity?.kind === 'free-talk'
-              ? talkActivity.data.invitation
-              : `${activityStory.title} 이야기를 들려주시겠어요?`
-          }
+          activity={current.activity}
+          story={current.story}
           onSpoken={handleSpoken}
           onDone={handleActivityDone}
         />
