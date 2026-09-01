@@ -1,0 +1,120 @@
+/*
+ * 손자녀 메시지를 보고 답장하는 화면.
+ *
+ * 답장 방법은 두 가지다. 말로 하기와 문구 고르기.
+ * 둘을 한 화면에 다 펼치면 누를 수 있는 것이 다섯 개가 되어
+ * "화면당 최대 네 개" 기준을 넘는다. 그래서 방법을 먼저 고르게 한다.
+ */
+
+/* 가로 화면을 살려 왼쪽에 메시지, 오른쪽에 사진을 놓는다 */
+.message__body {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-6);
+  height: 100%;
+}
+
+.message__from {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.message__profile {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message__text {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* 함께 보낸 사진은 화면에서 가장 큰 자리를 차지한다 */
+.message__photo {
+  flex: 1.2;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  object-fit: cover;
+  background: var(--color-surround);
+}
+
+/* 사진이 없는 날에는 메시지가 화면 가운데를 차지한다 */
+.message__from--wide {
+  align-items: center;
+  text-align: center;
+}
+
+/* 문구 고르기 — 넷을 두 줄로 나눠 넉넉하게 */
+.message__phrases {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--touch-gap);
+}
+
+/* 마이크 버튼 */
+.message__mic-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  height: 100%;
+}
+
+.message__mic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  height: 260px;
+  border: 6px solid var(--color-fill);
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--motion-press) var(--ease);
+}
+
+.message__mic--held {
+  background: var(--color-pressed);
+}
+
+.message__mic-hint {
+  font-size: var(--text-lg);
+  color: var(--color-text-soft);
+  /* 문구가 바뀌어도 아래 내용이 밀리지 않도록 자리를 잡아 둔다 */
+  min-height: 1.6em;
+}
+
+/* 전했다는 안내 */
+@keyframes message-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.message__sent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  animation: message-appear var(--motion-slow) var(--ease) both;
+}
+
+.message__sent-text {
+  font-size: 56px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+}

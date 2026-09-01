@@ -1,5 +1,5 @@
-import QuestionScreen from './screens/QuestionScreen'
+import MessageScreen from './screens/MessageScreen'
 
 export default function App() {
-  return <QuestionScreen />
+  return <MessageScreen />
 }
