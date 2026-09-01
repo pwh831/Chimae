@@ -1,0 +1,104 @@
+/*
+ * 전역 디자인 기준.
+ * 어르신용 화면의 최소 요건을 토큰으로 고정한다. 개별 화면에서 이 값보다
+ * 작게 쓰지 않는다. (글자 크기, 터치 영역, 명도 대비, 애니메이션 속도)
+ * 상세 근거는 CLAUDE.md "UI 기준" 참고.
+ */
+
+:root {
+  /* 글자 — 본문 24px, 버튼 32px가 하한이다 */
+  --text-body: 24px;
+  --text-lg: 28px;
+  --text-button: 32px;
+  --text-title: 44px;
+
+  /* 터치 — 100x100px 미만으로 줄이지 않는다 */
+  --touch-min: 100px;
+  --touch-gap: 32px;
+
+  /* 간격 */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+
+  /* 색 — 흰 배경에 진한 회색. 본문 대비 15:1, 테두리 대비 4.6:1 */
+  --color-bg: #ffffff;
+  --color-surround: #e8ebee;
+  --color-text: #1f2933;
+  --color-text-soft: #45525e;
+  --color-border: #6b7680;
+  --color-fill: #1f2933;
+  --color-on-fill: #ffffff;
+  --color-pressed: #dfe3e7;
+
+  /* 움직임 — 느리고 부드럽게. 깜빡임·빠른 전환 금지 */
+  --motion-slow: 400ms;
+  --motion-press: 200ms;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 기준 해상도 (태블릿 가로) */
+  --stage-width: 1280px;
+  --stage-height: 800px;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surround);
+  color: var(--color-text);
+  font-family: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR',
+    'Malgun Gothic', sans-serif;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  /* 두 번 탭 확대로 인한 조작 지연을 없앤다 */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  width: var(--stage-width);
+  height: var(--stage-height);
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+/* 키보드·스위치 조작 시 초점이 어디인지 분명히 보이게 */
+:focus-visible {
+  outline: 4px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+/* 움직임에 민감한 사용자에게는 전환을 없앤다 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
+}
