@@ -1,6 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="손녀 지민 자리표시 그림">
-  <rect width="240" height="240" rx="120" fill="#dfe3e7"/>
-  <circle cx="120" cy="96" r="38" fill="none" stroke="#6b7680" stroke-width="8"/>
-  <path d="M52 200c0-37 30-58 68-58s68 21 68 58" fill="none" stroke="#6b7680" stroke-width="8" stroke-linecap="round"/>
-  <text x="120" y="228" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#45525e">손녀 지민</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="손녀 지민">
+  <defs><clipPath id="f"><circle cx="120" cy="120" r="120"/></clipPath></defs>
+  <g clip-path="url(#f)">
+    <circle cx="120" cy="120" r="120" fill="#e8e2d6"/>
+    <path d="M67 120c0-36 24-62 53-62s53 26 53 62c0 29-5 50-11 70H78c-6-20-11-41-11-70z" fill="#24211e"/>
+    <path d="M120 180c37 0 65 22 72 53H48c7-31 35-53 72-53z" fill="#2b4a7a"/>
+    <ellipse cx="120" cy="118" rx="39" ry="47" fill="#f2e0cd"/>
+    <path d="M81 112c-1-31 17-53 39-53s40 22 39 53c-6-14-13-23-21-26-11 8-32 12-48 6-4 4-7 11-9 20z" fill="#24211e"/>
+    <circle cx="105" cy="120" r="4.4" fill="#24211e"/>
+    <circle cx="135" cy="120" r="4.4" fill="#24211e"/>
+    <path d="M110 142c6 5 14 5 20 0" stroke="#24211e" stroke-width="4.4" stroke-linecap="round" fill="none"/>
+
+  </g>
 </svg>

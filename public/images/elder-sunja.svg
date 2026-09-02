@@ -1,6 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="순자님 자리표시 그림">
-  <rect width="240" height="240" rx="120" fill="#dfe3e7"/>
-  <circle cx="120" cy="96" r="38" fill="none" stroke="#6b7680" stroke-width="8"/>
-  <path d="M52 200c0-37 30-58 68-58s68 21 68 58" fill="none" stroke="#6b7680" stroke-width="8" stroke-linecap="round"/>
-  <text x="120" y="228" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#45525e">순자님</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="순자님">
+  <defs><clipPath id="f"><circle cx="120" cy="120" r="120"/></clipPath></defs>
+  <g clip-path="url(#f)">
+    <circle cx="120" cy="120" r="120" fill="#e8e2d6"/>
+    <path d="M64 118c0-34 25-58 56-58s56 24 56 58c0 12-2 22-5 30H69c-3-8-5-18-5-30z" fill="#cfc9bf"/>
+    <path d="M120 176c37 0 64 21 70 52H50c6-31 33-52 70-52z" fill="#b7c9c4"/>
+    <path d="M120 176c8 0 15 1 22 3l-22 24-22-24c7-2 14-3 22-3z" fill="#fcfbf8"/>
+    <ellipse cx="120" cy="118" rx="38" ry="45" fill="#f2e0cd"/>
+    <path d="M80 112c-2-32 17-52 40-52s42 20 40 52c-5-15-12-24-21-27-11 8-31 11-48 5-5 4-8 11-11 22z" fill="#cfc9bf"/>
+    <circle cx="105" cy="120" r="4" fill="#24211e"/>
+    <circle cx="135" cy="120" r="4" fill="#24211e"/>
+    <path d="M110 142c6 5 14 5 20 0" stroke="#24211e" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  </g>
 </svg>

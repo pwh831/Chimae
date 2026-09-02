@@ -24,20 +24,40 @@
   --space-5: 48px;
   --space-6: 64px;
 
-  /* 색 — 흰 배경에 진한 회색. 본문 대비 15:1, 테두리 대비 4.6:1 */
-  --color-bg: #ffffff;
-  --color-surround: #e8ebee;
-  --color-text: #1f2933;
-  --color-text-soft: #45525e;
-  --color-border: #6b7680;
-  --color-fill: #1f2933;
-  --color-on-fill: #ffffff;
-  --color-pressed: #dfe3e7;
+  /*
+   * 색 — 창호지 같은 따뜻한 바탕에 먹빛 글씨.
+   * 흰색 대신 아주 옅은 미색을 쓴다. 종일 켜 두는 화면이라 순백은 눈이 시리다.
+   * 대비는 흰 바탕일 때보다 낮아지지 않게 잡았다.
+   *   본문 15:1 · 보조 8:1 · 테두리 5:1 · 쪽빛 8.5:1
+   */
+  --color-bg: #fcfbf8;
+  --color-surround: #e6e1d7;
+  --color-text: #24211e;
+  --color-text-soft: #4e4a45;
+  --color-border: #6e6862;
+  --color-fill: #24211e;
+  --color-on-fill: #fcfbf8;
+  --color-pressed: #ece7dd;
+  /*
+   * 쪽빛. 뜻을 전하는 데 쓰지 않는다 — 맞음·틀림·중요함을 색으로 말하지 않기 위해서다.
+   * 지금은 초점 테두리와 그림 안에서만 쓴다.
+   */
+  --color-accent: #2b4a7a;
 
   /* 움직임 — 느리고 부드럽게. 깜빡임·빠른 전환 금지 */
   --motion-slow: 400ms;
   --motion-press: 200ms;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /*
+   * 글꼴.
+   * 외부에서 내려받지 않는다 (오프라인에서도 같아야 한다).
+   * 제목은 명조 계열을 먼저 찾고, 없는 기기에서는 본문 고딕으로 조용히 내려간다.
+   */
+  --font-body: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR',
+    'Malgun Gothic', sans-serif;
+  --font-display: 'Nanum Myeongjo', 'Noto Serif KR', AppleMyungjo, Batang, '바탕',
+    'Apple SD Gothic Neo', 'Noto Sans KR', serif;
 
   /* 기준 해상도 (태블릿 가로) */
   --stage-width: 1280px;
@@ -64,8 +84,7 @@ body {
   justify-content: center;
   background: var(--color-surround);
   color: var(--color-text);
-  font-family: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR',
-    'Malgun Gothic', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -95,7 +114,7 @@ p {
 
 /* 키보드·스위치 조작 시 초점이 어디인지 분명히 보이게 */
 :focus-visible {
-  outline: 4px solid var(--color-text);
+  outline: 4px solid var(--color-accent);
   outline-offset: 4px;
 }
 

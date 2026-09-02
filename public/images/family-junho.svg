@@ -1,6 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="손자 준호 자리표시 그림">
-  <rect width="240" height="240" rx="120" fill="#dfe3e7"/>
-  <circle cx="120" cy="96" r="38" fill="none" stroke="#6b7680" stroke-width="8"/>
-  <path d="M52 200c0-37 30-58 68-58s68 21 68 58" fill="none" stroke="#6b7680" stroke-width="8" stroke-linecap="round"/>
-  <text x="120" y="228" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#45525e">손자 준호</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="손자 준호">
+  <defs><clipPath id="f"><circle cx="120" cy="120" r="120"/></clipPath></defs>
+  <g clip-path="url(#f)">
+    <circle cx="120" cy="120" r="120" fill="#e8e2d6"/>
+    <path d="M120 182c37 0 65 22 72 51H48c7-29 35-51 72-51z" fill="#c9b79c"/>
+    <ellipse cx="120" cy="120" rx="38" ry="45" fill="#f2e0cd"/>
+    <path d="M82 116c-2-33 16-54 38-54s40 21 38 54c-5-16-11-25-19-28-11 9-32 12-48 6-4 4-7 11-9 22z" fill="#24211e"/>
+    <circle cx="106" cy="122" r="4.4" fill="#24211e"/>
+    <circle cx="134" cy="122" r="4.4" fill="#24211e"/>
+    <path d="M111 143c6 5 12 5 18 0" stroke="#24211e" stroke-width="4.4" stroke-linecap="round" fill="none"/>
+
+  </g>
 </svg>

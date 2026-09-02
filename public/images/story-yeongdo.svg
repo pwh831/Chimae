@@ -1,7 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="영도 골목 자리표시 그림">
-  <rect width="800" height="600" fill="#dfe3e7"/>
-  <rect x="180" y="150" width="440" height="280" rx="16" fill="none" stroke="#6b7680" stroke-width="10"/>
-  <circle cx="290" cy="235" r="30" fill="none" stroke="#6b7680" stroke-width="10"/>
-  <path d="M200 400l120-105 90 78 80-64 130 111" fill="none" stroke="#6b7680" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="400" y="500" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#45525e">영도 골목</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="영도 골목">
+  <rect width="800" height="600" fill="#e8e2d6"/>
+  <rect y="0" width="800" height="210" fill="#cfd8dd"/>
+  <path d="M0 210h800v40H0z" fill="#2b4a7a" opacity="0.55"/>
+  <g fill="#fcfbf8" stroke="#24211e" stroke-width="6" stroke-linejoin="round">
+    <path d="M80 250h150v120H80z"/><path d="M70 250l85-52 85 52z" fill="#c9b79c"/>
+    <path d="M270 214h140v156H270z"/><path d="M260 214l80-48 80 48z" fill="#c9b79c"/>
+    <path d="M470 258h150v112H470z"/><path d="M460 258l85-50 85 50z" fill="#c9b79c"/>
+  </g>
+  <g fill="#4e4a45"><rect x="118" y="286" width="46" height="52"/><rect x="316" y="252" width="48" height="54"/><rect x="512" y="292" width="46" height="50"/></g>
+  <path d="M0 600h800V430H0z" fill="#c9b79c" opacity="0.5"/>
+  <g stroke="#24211e" stroke-width="7" stroke-linecap="round">
+    <path d="M256 566h288M276 524h248M296 482h208M316 440h168M336 398h128"/>
+  </g>
+  <path d="M246 566L332 382M554 566L468 382" stroke="#24211e" stroke-width="8" stroke-linecap="round" fill="none"/>
+
 </svg>
